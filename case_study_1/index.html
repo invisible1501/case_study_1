@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        #home {
+            position: relative;
+            height: fit-content;
+            padding-bottom: 100vh;
+        }
+
+        #home .container {
+            width: 100%;
+            position: absolute;
+            z-index: 1;
+        }
+
+        #home .header {
+            height: 80px;
+            line-height: 80px;
+            width: 100%;
+            color: white;
+            padding-left: 50px;
+            font-size: 20px;
+        }
+
+        #home .content>div {
+            position: relative;
+            width: fit-content;
+            padding-top: 80px;
+            height: 80px;
+            margin: auto;
+        }
+
+        #home .content>div .son {
+            position: absolute;
+            height: 40px;
+            width: 0px;
+            background-color: white;
+        }
+
+        #home .content>div>div {
+            width: 130px;
+            float: left;
+            text-align: center;
+            border: thin solid white;
+            margin: 10px;
+            height: 40px;
+            line-height: 40px;
+            color: white;
+        }
+
+        #home .content>div>div:hover .son {
+            cursor: pointer;
+            width: 129px;
+            transition: width 1s;
+        }
+
+        .text {
+            text-align: center;
+            width: 130px;
+            position: absolute;
+            z-index: 1;
+        }
+
+        #home .content>div>div:hover .text {
+            color: black;
+            cursor: pointer;
+        }
+
+        #home .bg_color {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            background-color: #009688;
+            background-image: linear-gradient(black 15%, #009688 60%);
+        }
+
+        #home>img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
+        #nav {
+            height: 100vh;
+            width: 250px;
+            position: fixed;
+            top: 0;
+            right: -250px;
+            z-index: 1;
+            background-color: #009688;
+            transition: right 0.5s;
+            font-size: 18px;
+        }
+
+        #nav ul li {
+            margin: 50px 20px;
+            list-style: none;
+        }
+
+        #nav ul li a {
+            list-style-type: none;
+            text-decoration: none;
+            color: white;
+        }
+
+        #menuBtn {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: fit-content;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            background-color: #009688;
+            z-index: 3;
+            border-radius: 3px;
+        }
+
+        #menuBtn img {
+            width: 20px;
+            margin-top: 15px;
+            object-fit: cover;
+        }
+
+        /*feature*/
+
+        #features,
+        #services,
+        #testimonial,
+        #meetUs {
+            width: 100%;
+            height: fit-content;
+            padding-bottom: 30px;
+        }
+
+        .fea_header,
+        .ser_header,
+        .tes_header {
+            padding-top: 40px;
+            width: 100%;
+        }
+
+        .fea_header p,
+        .ser_header p,
+        .tes_header p,
+        .contact_header p {
+            text-align: center;
+        }
+
+        #features .fea_content {
+            width: 55%;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: center;
+            align-content: center;
+        }
+
+        #features .fea_content .left, #features .fea_content .right{
+            width: 50%;
+            height: fit-content;
+            align-self: center;
+        }
+
+        #features .fea_content .left p {
+            padding-bottom: 20px;
+            font-size: 17px;
+        }
+
+        #features .fea_content .left h2 {
+            padding: 10px 0px;
+            color: #009688;
+            font-weight: normal;
+        }
+
+        #features .fea_content .right img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /*Services*/
+
+        #services {
+            background-color: #ddd;
+        }
+
+        #services .ser_content {
+            width: 55%;
+            height: fit-content;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: center;
+            align-content: center;
+        }
+
+        #services .ser_content .pic {
+            width: 48%;
+            margin: 10px 1%;
+            position: relative;
+        }
+
+        #services .ser_content .pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        #services .ser_content .pic .overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            border-radius: 10px;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), #009688);
+            opacity: 0;
+            transition: 1s;
+        }
+        
+        #services .ser_content .pic .script {
+            width: 80%;
+            text-align: center;
+            color: white;
+            position: absolute;
+            bottom: 0;  
+            opacity: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: 0.8s;
+        }
+
+        hr {
+            width: 90%;
+            margin: 10px auto;
+            height: 2px;
+        }
+
+        #services .ser_content .pic:hover .overlay {
+            opacity: 1;
+        }
+
+        #services .ser_content .pic:hover .script {
+            bottom: 25%;
+            opacity: 0.7;
+        }
+
+        #testimonial {
+            background-color: rgb(243, 243, 243);
+        }
+
+        .tes_content {
+            width: 80%;
+            height: fit-content;
+            padding: 80px 0;
+            margin: auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .tes_content .contact {
+            width: 30%;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0px 15px 0 8px rgb(238, 238, 238);
+            transition: 0.5s;
+        }
+
+        .tes_content .contact:hover {
+            cursor: pointer;
+            margin-top: 8px;
+            margin-bottom: -8px;  
+        }
+
+        .tes_content .contact img {
+            float: left;
+            width: 40px;
+            margin-right: 15px;
+            border-radius: 3px;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .contact_header {
+            width: 100%;
+            height: 200px;
+            margin: auto;
+            position: relative;
+        }
+
+        .contact_header>div {
+            text-align: center;
+            width: 40%;
+            left: 30%;
+            position: absolute;
+        }
+
+        .contact_header img {
+            width: 50%;
+            height: auto;
+            object-fit: cover;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        #meetUs {
+            background-color: #ddd;
+        }
+
+        .meetUs_content {
+            width: 100%;
+            height: 160px;
+            padding-bottom: 30px;
+        }
+
+        .meetUs_content .left {
+            float: left;
+            text-align: left;
+            margin-left: 100px;
+            line-height: 34px;
+        }
+
+        .meetUs_content .right {
+            float: right;
+            text-align: right;
+            margin-right: 100px;
+            line-height: 34px;
+        }
+
+        #meetUs .footer {
+            width: 100%;
+        }
+
+        #meetUs .footer .icon {
+            width: 10%;
+            margin: auto;
+            padding: 20px 0;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-self: center;
+        }
+
+        #meetUs .footer .icon>div {
+            width: 20px;
+            height: 20px;
+        }
+
+        #meetUs .footer .icon>div img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }  
+
+        #meetUs .footer p {
+            text-align: center;
+        }
+
+    </style>
+    <script>
+        function nav() {
+            var sideNav = document.getElementById("nav");
+            var menu = document.getElementById("menu");
+            if (sideNav.style.right == "-250px") {
+                sideNav.style.right = "0";
+                menu.src = "image/close.png";
+            }
+            else {
+                sideNav.style.right = "-250px";
+                menu.src = "image/menu.png";
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!--Home-->
+    <div id="home">
+        <div class="container">
+            <div class="header"><b>BARBER</b></div>
+            <div class="content">
+                <p style="text-align: center; font-size: 140px; color: white; margin: 150px 0 50px 0;">Hair Studio</p>
+                <p style="color: white; font-size: 20px; text-align: center;"><i>Style Your Hair is Style Your Life</i>
+                </p>
+                <div>
+                    <div>
+                        <div class="son"></div>
+                        <div class="text">Find Out</div>
+                    </div>
+                    <div>
+                        <div class="son"></div>
+                        <div class="text">Read More</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bg_color"></div>
+        <img src="/case_study_1/image/banner.jpg" alt="">
+    </div>
+    <!--endHome-->
+
+    <!--Nav-->
+    <div id="nav">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#testimonial">Testimonial</a></li>
+            <li><a href="#meetUs">Meet Us</a></li>
+        </ul>
+    </div>
+    <div id="menuBtn" onclick="nav()"><img src="/case_study_1/image/menu.png" id="menu"></div>
+    <!--endNav-->
+
+    <!--Features-->
+    <div id="features">
+        <div class="fea_header">
+            <p style="font-size: 19px;">Feature</p>
+            <p style="font-size: 55px;">Why Choose Us</p>
+        </div>
+        <div class="fea_content">
+            <div class="left">
+                <h2>Experience Staff</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Praesent erat mi, dignissim vel malesuada quis, lacinia vel diam.
+                </p>
+                <h2>Pre Booking Online</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Praesent erat mi, dignissim vel malesuada quis, lacinia vel diam.
+                </p>
+                <h2>Affordable Cost</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Praesent erat mi, dignissim vel malesuada quis, lacinia vel diam.
+                </p>
+            </div>
+            <div class="right">
+                <img src="/case_study_1/image/barber-man.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    <!--endFeatures-->
+
+    <!--Services-->
+    <div id="services">
+        <div class="ser_header">
+            <p style="font-size: 19px;">Services</p>
+            <p style="font-size: 55px;">We Provider Better</p>
+        </div>
+        <div class="ser_content">
+            <div class="pic">
+                <img src="/case_study_1/image/pic-1.jpg" alt="">
+                <div class="overlay"></div>
+                <div class="script">
+                    <h3>Beard Trim</h3>
+                    <hr>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Aliquam tempor nisl vel aliquam elementum</p>
+                </div>
+            </div>
+            <div class="pic">
+                <img src="/case_study_1/image/pic-2.jpg" alt="">
+                <div class="overlay"></div>
+                <div class="script">
+                    <h3>Hair cut</h3>
+                    <hr>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Aliquam tempor nisl vel aliquam elementum</p>
+                </div>            
+            </div>
+            <div class="pic">
+                <img src="/case_study_1/image/pic-3.jpg" alt="">
+                <div class="overlay"></div>
+                <div class="script">
+                    <h3>Hair styling</h3>
+                    <hr>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Aliquam tempor nisl vel aliquam elementum</p>
+                </div>            
+            </div>
+            <div class="pic">
+                <img src="/case_study_1/image/pic-4.jpg" alt="">
+                <div class="overlay"></div>
+                <div class="script">
+                    <h3>Dry Shapoo</h3>
+                    <hr>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Aliquam tempor nisl vel aliquam elementum</p>
+                </div>            
+            </div>
+        </div>
+    </div>
+    <div id="testimonial">
+        <div class="tes_header">
+            <p style="font-size: 19px;">Testimonial</p>
+            <p style="font-size: 55px;">What Client Says</p>
+        </div>
+        <div class="tes_content">
+            <div class="contact">
+                <div style="height: 40%;">
+                    <img src="/case_study_1/image/img-1.jpg" alt="">
+                    <p>KEN NORMAN <br>
+                    <span style="color: rgb(89, 192, 144);">&commat;kennorman</span></p>
+                </div>
+                <div style="height: 60%; padding-top: 15px;">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Mauris at lacinia metus, nec pretium tortor</p>
+                </div>
+            </div>
+            <div class="contact">
+                <div style="height: 40%;">
+                    <img src="/case_study_1/image/img-2.jpg" alt="">
+                    <p>KARIAN NICK <br>
+                    <span style="color: rgb(89, 192, 144);">&commat;kariannick</span></p>
+                </div>
+                <div style="height: 60%; padding-top: 15px;">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Mauris at lacinia metus, nec pretium tortor</p>
+                </div>
+            </div>
+            <div class="contact">
+                <div style="height: 40%;">
+                    <img src="/case_study_1/image/img-3.jpg" alt="">
+                    <p>DIARA JAMES <br>
+                    <span style="color: rgb(89, 192, 144);">&commat;diarajames</span></p>
+                </div>
+                <div style="height: 60%; padding-top: 15px;">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Mauris at lacinia metus, nec pretium tortor</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="meetUs">
+        <div class="contact_header">
+            <div style="padding-top: 40px;"><p style="font-size: 19px;">Contact</p>
+            <p style="font-size: 55px;">Visit Shop Today</p>
+            </div>
+            <div><img src="/case_study_1/image/footer-img.png" alt=""></div>
+        </div>
+        <div class="meetUs_content">
+            <div class="left">
+                <h2>Opening Hours</h2>
+                <p>
+                    Monday to Friday - 9am to 9pm <br>
+                    Saturday to Sunday - 8am to 11pm
+                </p>
+            </div>
+            <div class="right">
+                <h2>Get In Touch</h2>
+                <p>
+                    #30 abc Colony, xyz City IN <br>
+                    example@website.com <br>
+                    +01 123456789
+                </p>
+            </div>
+            <div></div>
+        </div>
+        <div class="footer">
+            <div class="icon">
+                <div><a href="#"><img src="/case_study_1/image/fb.PNG" alt=""></a></div>
+                <div><a href="#"><img src="/case_study_1/image/insta.PNG" alt="" style="border-radius: 0px;"></a></div>
+                <div><a href="#"><img src="/case_study_1/image/twitter.PNG" alt=""></a></div>
+                <div><a href="#"><img src="/case_study_1/image/youtube.PNG" alt="" style="border-radius: 7px;"></a></div>
+            </div>
+            <p>Copyright Easy Tutorials Youtube Channel</p>
+        </div>
+    </div>
+</body>
+
+</html>
